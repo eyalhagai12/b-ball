@@ -25,6 +25,13 @@ test:  $(OBJECTS)
 $(OBJECT_PATH)/%.o: $(SOURCE_PATH)/%.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
+main: main.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+	./main
+
+remake:
+	make clean
+	make main
 
 tidy:
 	clang-tidy $(SOURCES) $(HEADERS) $(TIDY_FLAGS) --
@@ -35,3 +42,4 @@ valgrind: test
 clean:
 	rm -f $(OBJECTS) *.o test* 
 	rm -f StudentTest*.cpp
+	rm -f main
