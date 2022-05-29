@@ -32,11 +32,23 @@ void Season::play_all_games()
                   << ", losses - " << team->get_losses()
                   << " score difference - " << team->get_score_diff() << std::endl;
     }
+}
 
-    std::cout << "\nTop Teams: " << std::endl;
-    long top_teams = 5;
-    for (Team *team : league.get_top_teams(top_teams))
+std::vector<Team *> Season::get_top_teams(long n_teams) const
+{
+    return league.get_top_teams(n_teams);
+}
+
+size_t Season::n_positive_diff_teams() const
+{
+    size_t counter = 0;
+    for (Team *team : league)
     {
-        std::cout << team->get_name() << std::endl;
+        if (team->get_score_diff() > 0)
+        {
+            counter += 1;
+        }
     }
+
+    return counter;
 }

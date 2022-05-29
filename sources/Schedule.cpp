@@ -18,6 +18,10 @@ Schedule::Schedule(League &league) : league(league), idx(0)
             }
         }
     }
+
+    // shuffle the games
+    auto rng = std::default_random_engine{};
+    std::shuffle(this->games.begin(), this->games.end(), rng);
 }
 
 Schedule::~Schedule()

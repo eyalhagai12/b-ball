@@ -16,4 +16,6 @@ public:
     // methods
     void play_game();
     void play_all_games();
+    std::vector<Team *> get_top_teams(long n_teams) const;
+    size_t n_positive_diff_teams() const;
 };
