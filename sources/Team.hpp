@@ -4,7 +4,7 @@ class Team
 {
 private:
     float skill;
-    const std::string &name;
+    const std::string name;
 
 public:
     // public attributes 
