@@ -17,6 +17,8 @@ Team &Game::get_guest_team() { return this->guest_team; }
 
 Team &Game::get_home_team() { return this->home_team; }
 
+std::vector<int> Game::get_score() { return this->score; }
+
 // play the game and return the winner
 Team &Game::play()
 {
@@ -58,16 +60,25 @@ Team &Game::play()
     // return winner
     if (home_score >= guest_score)
     {
-        home_team.wins++;
-        guest_team.losses++;
-        home_team.score_diff = home_score - guest_score;
-        guest_team.score_diff = home_score - guest_score;
+        home_team.add_win();
+        guest_team.add_loss();
+        home_team.add_to_diff(home_score - guest_score);
+        guest_team.add_to_diff(guest_score - home_score);
         return home_team;
     }
 
-    guest_team.wins++;
-    home_team.losses++;
-    home_team.score_diff = guest_score - home_score;
-    guest_team.score_diff = guest_score - home_score;
+    guest_team.add_win();
+    home_team.add_loss();
+    home_team.add_to_diff(home_score - guest_score);
+    guest_team.add_to_diff(guest_score - home_score);
     return guest_team;
+}
+
+// ---------------------------------------------------
+// operator overloads
+// ---------------------------------------------------
+std::ostream &operator<<(std::ostream &out, const Game &game)
+{
+    out << game.home_team.get_name() << " VS " << game.guest_team.get_name() << std::endl;
+    return out;
 }

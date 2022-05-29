@@ -29,6 +29,34 @@ Schedule::~Schedule()
 }
 
 //------------------------------------------------------
+// method implementations
+//------------------------------------------------------
+Game &Schedule::get_current_game() const { return *(games.at(idx)); }
+
+void Schedule::next()
+{
+    if (idx < games.size())
+    {
+        idx++;
+    }
+}
+
+std::vector<std::vector<int>> Schedule::get_scores() const
+{
+    std::vector<std::vector<int>> scores;
+    for (size_t i = 0; i < idx; ++i)
+    {
+        scores.push_back(games.at(i)->get_score());
+    }
+
+    return scores;
+}
+
+std::vector<Game *>::iterator Schedule::begin() { return this->games.begin(); }
+
+std::vector<Game *>::iterator Schedule::end() { return this->games.end(); }
+
+//------------------------------------------------------
 // friend functions
 //------------------------------------------------------
 std::ostream &operator<<(std::ostream &out, const Schedule &schedule)

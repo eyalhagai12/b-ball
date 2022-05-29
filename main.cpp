@@ -5,7 +5,9 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    Season s;
-    cout << "Done!" << endl;
+    League league;
+    Schedule sch(league);
+    Season s(league, sch);
+    s.play_all_games();
     return 0;
 }
