@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#define num_of_teams 20
+const size_t num_of_teams = 20;
 
 // -------------------------------------------------
 // construtors and destructor
@@ -13,7 +13,8 @@ League::League() : teams(std::vector<Team *>())
     for (size_t i = 0; i < num_of_teams; ++i)
     {
         std::string new_name = "Team " + std::to_string(i);
-        Team *new_team = new Team(new_name, 0.5);
+        float skill = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        Team *new_team = new Team(new_name, skill);
         teams.push_back(new_team);
     }
 }

@@ -52,3 +52,31 @@ size_t Season::n_positive_diff_teams() const
 
     return counter;
 }
+
+std::pair<Team *, size_t> Season::longet_win_streak() const
+{
+    Team *max = league.get_teams().at(0);
+    for (Team *team : league)
+    {
+        if (team->get_win_streak() > max->get_win_streak())
+        {
+            max = team;
+        }
+    }
+
+    return std::pair<Team *, size_t>(max, max->get_win_streak());
+}
+
+std::pair<Team *, size_t> Season::longet_loss_streak() const
+{
+    Team *max = league.get_teams().at(0);
+    for (Team *team : league)
+    {
+        if (team->get_lose_streak() > max->get_lose_streak())
+        {
+            max = team;
+        }
+    }
+
+    return std::pair<Team *, size_t>(max, max->get_lose_streak());
+}

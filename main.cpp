@@ -20,6 +20,12 @@ int main(int argc, char const *argv[])
     }
 
     size_t n_pos_teams = s.n_positive_diff_teams();
-    cout << n_pos_teams << " Teams Have Scored More Than They Got Scored" << endl;
+    cout << endl
+         << n_pos_teams << " Teams Have Scored More Than They Got Scored" << endl;
+
+    auto w_streak = s.longet_win_streak();
+    cout << endl
+         << w_streak.first->get_name() << " has had the longest win streak, They won "
+         << w_streak.second << " times in a row!" << endl;
     return 0;
 }

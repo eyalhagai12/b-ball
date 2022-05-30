@@ -18,4 +18,6 @@ public:
     void play_all_games();
     std::vector<Team *> get_top_teams(long n_teams) const;
     size_t n_positive_diff_teams() const;
+    std::pair<Team *, size_t> longet_win_streak() const;
+    std::pair<Team *, size_t> longet_loss_streak() const;
 };
