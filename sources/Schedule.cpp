@@ -46,7 +46,7 @@ void Schedule::next()
     {
         idx++;
         games_left--;
-        std::cout << "Games Left: " << games_left << std::endl;
+        // std::cout << "Games Left: " << games_left << std::endl;
     }
     else
     {

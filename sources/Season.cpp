@@ -13,8 +13,8 @@ void Season::play_game()
     Game &game = schedule.get_current_game();
     Team &winner = game.play();
     schedule.next();
-    std::cout << "Played -> " << game << "" << winner.get_name() << " is the winner!! " << std::endl
-              << std::endl;
+    // std::cout << "Played -> " << game << "" << winner.get_name() << " is the winner!! " << std::endl
+    //           << std::endl;
 }
 
 void Season::play_games(size_t n_games)
