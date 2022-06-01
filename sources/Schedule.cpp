@@ -3,7 +3,7 @@
 //------------------------------------------------------
 // constructor and destructor
 //------------------------------------------------------
-Schedule::Schedule(League &league) : league(league), idx(0)
+Schedule::Schedule(League &league) : league(league), idx(0), games_left(0)
 {
     std::vector<Team *> teams = this->league.get_teams();
 
@@ -22,6 +22,9 @@ Schedule::Schedule(League &league) : league(league), idx(0)
     // shuffle the games
     auto rng = std::default_random_engine{};
     std::shuffle(this->games.begin(), this->games.end(), rng);
+
+    // set games left
+    this->games_left = games.size();
 }
 
 Schedule::~Schedule()
@@ -42,6 +45,12 @@ void Schedule::next()
     if (idx < games.size())
     {
         idx++;
+        games_left--;
+        std::cout << "Games Left: " << games_left << std::endl;
+    }
+    else
+    {
+        throw std::runtime_error("No more games to play!");
     }
 }
 
@@ -59,6 +68,10 @@ std::vector<std::vector<int>> Schedule::get_scores() const
 std::vector<Game *>::iterator Schedule::begin() { return this->games.begin(); }
 
 std::vector<Game *>::iterator Schedule::end() { return this->games.end(); }
+
+size_t Schedule::get_current_game_idx() { return idx; }
+
+size_t Schedule::get_games_left() { return games_left; }
 
 //------------------------------------------------------
 // friend functions

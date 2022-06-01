@@ -2,18 +2,33 @@
 #include <random>
 
 // parameters
-const int max_skill_bonus = 10;
-const int max_points = 100;
-const int home_min = 55;
-const int guest_min = 50;
-const int home_mean = 60;
-const int guest_mean = home_mean - 5;
-const int standard_deviation = 20;
+const size_t max_skill_bonus = 10;
+const size_t max_points = 100;
+const size_t home_min = 55;
+const size_t guest_min = 50;
+const size_t home_mean = 80;
+const size_t guest_mean = home_mean - 5;
+const size_t standard_deviation = 10;
 
 // ---------------------------------------------------
 // cosntructor and destructor
 // ---------------------------------------------------
 Game::Game(Team &home_team, Team &guest_team) : home_team(home_team), guest_team(guest_team), score(std::vector<int>(2)) {}
+
+// ---------------------------------------------------
+// util functions
+// ---------------------------------------------------
+void corrent_scores(size_t &score, const size_t &min, const size_t &max)
+{
+    if (score > max)
+    {
+        score = max;
+    }
+    else if (score < min)
+    {
+        score = min;
+    }
+}
 
 // ---------------------------------------------------
 // method implementations
@@ -33,26 +48,12 @@ Team &Game::play()
     std::normal_distribution<> guest_team_distr{guest_mean, standard_deviation};
 
     // generate score
-    int home_score = home_team_distr(gen);
-    int guest_score = guest_team_distr(gen);
+    size_t home_score = home_team_distr(gen);
+    size_t guest_score = guest_team_distr(gen);
 
     // check if the score is too high for the assignments requrements
-    if (home_score > max_points)
-    {
-        home_score = max_points;
-    }
-    else if (home_score < home_min)
-    {
-        home_score = home_min;
-    }
-    if (home_score > max_points)
-    {
-        home_score = max_points;
-    }
-    else if (home_score < guest_min)
-    {
-        home_score = guest_min;
-    }
+    corrent_scores(home_score, home_min, max_points);
+    corrent_scores(guest_score, guest_min, max_points);
 
     /// add skill bonus
     home_score += max_skill_bonus * home_team.get_skill();
@@ -62,20 +63,21 @@ Team &Game::play()
     this->score.at(0) = home_score;
     this->score.at(1) = guest_score;
 
+    home_team.add_scores(home_score);
+    home_team.add_scored(guest_score);
+    guest_team.add_scores(guest_score);
+    guest_team.add_scored(home_score);
+
     // return winner
     if (home_score >= guest_score)
     {
         home_team.add_win();
         guest_team.add_loss();
-        home_team.add_to_diff(home_score - guest_score);
-        guest_team.add_to_diff(guest_score - home_score);
         return home_team;
     }
 
     guest_team.add_win();
     home_team.add_loss();
-    home_team.add_to_diff(home_score - guest_score);
-    guest_team.add_to_diff(guest_score - home_score);
     return guest_team;
 }
 

@@ -13,6 +13,18 @@ League::League() : teams(std::vector<Team *>())
     for (size_t i = 0; i < num_of_teams; ++i)
     {
         std::string new_name = "Team " + std::to_string(i);
+        srand(time(NULL));
+        float skill = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        Team *new_team = new Team(new_name, skill);
+        teams.push_back(new_team);
+    }
+}
+
+League::League(std::vector<Team *> teams) : teams(teams)
+{
+    for (size_t i = this->teams.size(); i < this->teams.size(); ++i)
+    {
+        std::string new_name = "Team " + std::to_string(i);
         float skill = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
         Team *new_team = new Team(new_name, skill);
         teams.push_back(new_team);
@@ -33,8 +45,17 @@ League::~League()
 bool compare_teams(Team *team1, Team *team2)
 {
     // get ratios
-    float t1_ratio = team1->get_wins() / team1->get_losses();
-    float t2_ratio = team2->get_wins() / team2->get_losses();
+    float t1_ratio = team1->get_wins();
+    float t2_ratio = team2->get_wins();
+
+    if (team1->get_losses() > 0)
+    {
+        t1_ratio /= team1->get_losses();
+    }
+    if (team2->get_losses() > 0)
+    {
+        t2_ratio /= team2->get_losses();
+    }
 
     // compare
     if (t1_ratio > t2_ratio)
@@ -74,7 +95,7 @@ std::ostream &operator<<(std::ostream &out, const League &league)
 {
     for (Team *team : league.teams)
     {
-        out << team->get_name() << " ["
+        out << team->get_name() << ", Skill - " << team->get_skill() << " ["
             << "Wins - " << team->get_wins() << ", Losses - " << team->get_losses() << "]" << std::endl;
     }
 

@@ -7,11 +7,12 @@ Team::Team(const std::string &name, float skill) : name(name),
                                                    skill(skill),
                                                    wins(0),
                                                    losses(0),
-                                                   score_diff(0),
                                                    longest_win_streak(0),
                                                    longest_lose_streak(0),
                                                    w_count(0),
-                                                   l_count(0)
+                                                   l_count(0),
+                                                   scores(0),
+                                                   got_scored(0)
 {
 }
 
@@ -44,14 +45,30 @@ void Team::add_loss()
     }
 }
 
-void Team::add_to_diff(int diff) { score_diff += diff; }
+void Team::add_scores(size_t score) { this->scores += score; }
 
-size_t Team::get_wins() { return wins; }
+void Team::add_scored(size_t score) { this->got_scored += score; }
 
-size_t Team::get_losses() { return losses; }
+size_t Team::get_wins() const { return wins; }
 
-int Team::get_score_diff() { return score_diff; }
+size_t Team::get_losses() const { return losses; }
 
-size_t Team::get_win_streak() { return longest_win_streak; }
+int Team::get_score_diff() const { return this->scores - this->got_scored; }
 
-size_t Team::get_lose_streak() { return longest_lose_streak; }
+size_t Team::get_win_streak() const { return longest_win_streak; }
+
+size_t Team::get_lose_streak() const { return longest_lose_streak; }
+
+size_t Team::get_scores() const { return scores; }
+
+size_t Team::get_scored() const { return got_scored; }
+
+// -----------------------------------------------------
+// operator overloads
+// -----------------------------------------------------
+std::ostream &operator<<(std::ostream &out, const Team &team)
+{
+    out << "Name: " << team.name << ", Skill: " << team.skill << std::endl;
+
+    return out;
+}
