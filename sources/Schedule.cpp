@@ -69,9 +69,9 @@ std::vector<Game *>::iterator Schedule::begin() { return this->games.begin(); }
 
 std::vector<Game *>::iterator Schedule::end() { return this->games.end(); }
 
-size_t Schedule::get_current_game_idx() { return idx; }
+size_t Schedule::get_current_game_idx() const { return idx; }
 
-size_t Schedule::get_games_left() { return games_left; }
+size_t Schedule::get_games_left() const { return games_left; }
 
 //------------------------------------------------------
 // friend functions

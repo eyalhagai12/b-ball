@@ -16,6 +16,8 @@ private:
 public:
     // constructor destructor
     Schedule(League &league);
+    Schedule(const Schedule &other);
+    Schedule(Schedule &&other) noexcept;
     ~Schedule();
 
     // methods
@@ -24,9 +26,11 @@ public:
     std::vector<std::vector<int>> get_scores() const; // get scores to all played games
     std::vector<Game *>::iterator begin();            // get the start of the iterator over all games
     std::vector<Game *>::iterator end();              // get the end of the iterator over all games
-    size_t get_current_game_idx();                    // get the current game index
-    size_t get_games_left();                          // get the number of games left
+    size_t get_current_game_idx() const;              // get the current game index
+    size_t get_games_left() const;                    // get the number of games left
 
     // friend functions
     friend std::ostream &operator<<(std::ostream &out, const Schedule &schedule);
+    Schedule &operator=(const Schedule &other);
+    Schedule &operator=(Schedule &&other) noexcept;
 };

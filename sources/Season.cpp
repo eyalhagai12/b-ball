@@ -107,7 +107,7 @@ std::pair<Team *, size_t> Season::longet_loss_streak() const
 
 Team &Season::top_scores()
 {
-    Team *top_team = nullptr;
+    Team *top_team = league.get_teams().at(0);
     size_t max_score = 0;
     for (Team *team : league)
     {
@@ -123,7 +123,7 @@ Team &Season::top_scores()
 
 Team &Season::top_scored()
 {
-    Team *top_team = nullptr;
+    Team *top_team = league.get_teams().at(0);
     size_t max_score = 0;
     for (Team *team : league)
     {

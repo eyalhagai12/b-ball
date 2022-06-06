@@ -53,7 +53,7 @@ size_t Team::get_wins() const { return wins; }
 
 size_t Team::get_losses() const { return losses; }
 
-int Team::get_score_diff() const { return this->scores - this->got_scored; }
+int Team::get_score_diff() const { return (int)(this->scores - this->got_scored); }
 
 size_t Team::get_win_streak() const { return longest_win_streak; }
 

@@ -12,7 +12,8 @@ public:
     // construstor destructor
     League();
     League(std::vector<Team *> teams);
-    League(League &&other);
+    League(const League &other);
+    League(League &&other) noexcept;
     ~League();
 
     // methods
@@ -23,4 +24,6 @@ public:
 
     // operator overloads
     friend std::ostream &operator<<(std::ostream &out, const League &league);
+    League &operator=(const League &other);
+    League &operator=(League &&other) noexcept;
 };

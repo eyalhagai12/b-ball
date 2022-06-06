@@ -8,7 +8,7 @@ const size_t num_of_teams = 20;
 // -------------------------------------------------
 // construtors and destructor
 // -------------------------------------------------
-League::League() : teams(std::vector<Team *>())
+League::League()
 {
     for (size_t i = 0; i < num_of_teams; ++i)
     {

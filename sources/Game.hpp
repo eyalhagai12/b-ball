@@ -11,6 +11,8 @@ private:
 public:
     // constructor destructor
     Game(Team &home_team, Team &guest_team);
+    Game(const Game &other);
+    Game(Game &&other) noexcept;
     ~Game() = default;
 
     // methods
@@ -21,4 +23,6 @@ public:
 
     // operator overloads
     friend std::ostream &operator<<(std::ostream &out, const Game &game);
+    Game &operator=(const Game &other);
+    Game &operator=(Game &&other) noexcept;
 };

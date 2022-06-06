@@ -19,6 +19,8 @@ public:
 
     // constructor and destructor
     Team(const std::string &name, float skill);
+    Team(const Team &other);
+    Team(Team &&other) noexcept;
     ~Team() = default;
 
     // methods
@@ -38,4 +40,6 @@ public:
 
     // operator overload
     friend std::ostream &operator<<(std::ostream &out, const Team &team);
+    Team &operator=(const Team &other);
+    Team &operator=(Team &&other) noexcept;
 };
