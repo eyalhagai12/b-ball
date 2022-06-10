@@ -10,7 +10,6 @@ private:
 public:
     // constructors and destructor
     Season(League &league, Schedule &schedule);
-    Season(std::vector<Team *> teams);
     Season(const Season &other);
     Season(Season &&other) noexcept;
     ~Season() = default;
@@ -26,6 +25,8 @@ public:
     std::pair<Team *, size_t> longet_loss_streak() const;  // get the team with the longest lose streak and the lose streak
     Team &top_scores();                                    // get the team that scored the most
     Team &top_scored();                                    // get the team that got scored the most
+    League &get_league();                                  // get the league object of the season class
+    Schedule &get_schedule();                              // get the schedule object of the season class
 
     // operator overloads
     Season &operator=(const Season &other);

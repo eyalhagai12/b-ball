@@ -11,7 +11,7 @@ private:
 public:
     // construstor destructor
     League();
-    League(std::vector<Team *> teams);
+    League(std::vector<Team *> &teams);
     League(const League &other);
     League(League &&other) noexcept;
     ~League();

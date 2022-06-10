@@ -12,22 +12,22 @@ League::League()
 {
     for (size_t i = 0; i < num_of_teams; ++i)
     {
-        std::string new_name = "Team " + std::to_string(i);
-        srand(time(NULL));
+        std::string new_name = "Team " + std::to_string(i + 1);
+        // srand(time(NULL));`
         float skill = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
         Team *new_team = new Team(new_name, skill);
         teams.push_back(new_team);
     }
 }
 
-League::League(std::vector<Team *> teams) : teams(teams)
+League::League(std::vector<Team *> &teams) : teams(teams)
 {
-    for (size_t i = this->teams.size(); i < this->teams.size(); ++i)
+    for (size_t i = this->teams.size(); i < num_of_teams; ++i)
     {
-        std::string new_name = "Team " + std::to_string(i);
+        std::string new_name = "Team " + std::to_string(i + 1);
         float skill = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
         Team *new_team = new Team(new_name, skill);
-        teams.push_back(new_team);
+        this->teams.push_back(new_team);
     }
 }
 
@@ -89,7 +89,7 @@ std::vector<Team *>::iterator League::begin() { return this->teams.begin(); }
 std::vector<Team *>::iterator League::end() { return this->teams.end(); }
 
 // -------------------------------------------------
-// friend functions
+// operator overloads
 // -------------------------------------------------
 std::ostream &operator<<(std::ostream &out, const League &league)
 {

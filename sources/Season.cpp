@@ -13,8 +13,6 @@ void Season::play_game()
     Game &game = schedule.get_current_game();
     Team &winner = game.play();
     schedule.next();
-    // std::cout << "Played -> " << game << "" << winner.get_name() << " is the winner!! " << std::endl
-    //           << std::endl;
 }
 
 void Season::play_games(size_t n_games)
@@ -42,14 +40,6 @@ void Season::play_all_games()
     {
         game->play();
         schedule.next();
-    }
-
-    for (Team *team : league)
-    {
-        std::cout << team->get_name() << " : "
-                  << "wins - " << team->get_wins()
-                  << ", losses - " << team->get_losses()
-                  << " score difference - " << team->get_score_diff() << std::endl;
     }
 }
 
@@ -136,3 +126,7 @@ Team &Season::top_scored()
 
     return *top_team;
 }
+
+League &Season::get_league() { return this->league; }
+
+Schedule &Season::get_schedule() { return this->schedule; }
