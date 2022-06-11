@@ -110,6 +110,90 @@ void start_season(Season &season)
 
      cout << "All games are done: " << endl
           << season.get_league() << endl;
+
+     cout << "you may now see statistics on all the games:" << endl
+          << "1. show top teams (you decide the number of teams)" << endl
+          << "2. get the number of teams who scored more than they got scored" << endl
+          << "3. show the team with longest win streak" << endl
+          << "4. show the team with longest lose streak" << endl
+          << "5. get the team that scored the most" << endl
+          << "6. get the team that got scored the most" << endl
+          << "7. exit" << endl;
+
+     done = false;
+     do
+     {
+          cout << "Enter a command index: ";
+          int opt;
+          cin >> opt;
+          switch (opt)
+          {
+          case 1:
+          {
+               long n_teams;
+               cout << "Enter number of teams: ";
+               cin >> n_teams;
+               vector<Team *> top_teams = season.get_top_teams(n_teams);
+
+               for (Team *team : top_teams)
+               {
+                    cout << (*team);
+               }
+               break;
+          }
+          case 2:
+          {
+               size_t n_teams = season.n_positive_diff_teams();
+               cout << n_teams << " teams have scored more than they got scored" << endl;
+               break;
+          }
+          case 3:
+          {
+               auto longest_win_team = season.longet_win_streak();
+               cout << "The team "
+                    << "'" << longest_win_team.first->get_name() << "'"
+                    << " has a won " << longest_win_team.second << " games in a row, more than any other team!" << endl;
+               break;
+          }
+          case 4:
+          {
+               auto longest_lose_team = season.longet_loss_streak();
+               cout << "The team "
+                    << "'" << longest_lose_team.first->get_name() << "'"
+                    << " has a lost " << longest_lose_team.second << " games in a row, more than any other team!" << endl;
+               break;
+          }
+          case 5:
+          {
+               Team &team = season.top_scores();
+               cout << "The team "
+                    << "'" << team.get_name() << "'"
+                    << " has scored " << team.get_scores() << " points, more than any other team!" << endl;
+               break;
+          }
+          case 6:
+          {
+               Team &team = season.top_scored();
+               cout << "The team "
+                    << "'" << team.get_name() << "'"
+                    << " got scored " << team.get_scored() << " points, more than any other team!" << endl;
+               break;
+          }
+          case 7:
+          {
+               done = true;
+               break;
+          }
+
+          default:
+               cout << "Invalid option" << endl;
+               exit(1);
+               break;
+          }
+          cout << endl;
+     } while (!done);
+
+     cout << "Goodbye!" << endl;
 }
 
 int main(int argc, char const *argv[])

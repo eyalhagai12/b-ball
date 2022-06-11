@@ -68,7 +68,7 @@ size_t Team::get_scored() const { return got_scored; }
 // -----------------------------------------------------
 std::ostream &operator<<(std::ostream &out, const Team &team)
 {
-    out << "Name: " << team.name << ", Skill: " << team.skill << std::endl;
+    out << "Name: " << team.get_name() << " [wins: " << team.get_wins() << ", losses: " << team.get_losses() << ", score difference: " << team.get_score_diff() << "]" << std::endl;
 
     return out;
 }

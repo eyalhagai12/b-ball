@@ -1,6 +1,7 @@
 #include "League.hpp"
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 const size_t num_of_teams = 20;
@@ -95,7 +96,7 @@ std::ostream &operator<<(std::ostream &out, const League &league)
 {
     for (Team *team : league.teams)
     {
-        out << team->get_name() << ", Skill - " << team->get_skill() << " ["
+        out << team->get_name() << ", Skill - " << std::fixed << std::setprecision(2) << team->get_skill() << " ["
             << "Wins - " << team->get_wins() << ", Losses - " << team->get_losses() << "]" << std::endl;
     }
 
