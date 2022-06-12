@@ -7,6 +7,7 @@ League league;
 Schedule schedule(league);
 Season season(league, schedule);
 
+
 bool compare_teams_test(Team *team1, Team *team2)
 {
     // get ratios

@@ -5,6 +5,11 @@
 
 using namespace std;
 
+/**
+ * @brief Get the teams from the user
+ *
+ * @return vector<Team *> with the teams from the user
+ */
 vector<Team *> get_teams()
 {
      vector<Team *> teams;
@@ -37,6 +42,11 @@ vector<Team *> get_teams()
      return teams;
 }
 
+/**
+ * @brief the main program where we can play the games and see the statistics
+ *
+ * @param season the Season object that hold all the information about the teams and games
+ */
 void start_season(Season &season)
 {
      bool played = false;
@@ -70,7 +80,7 @@ void start_season(Season &season)
           }
           case 2:
           {
-               cout << "Played: " << season.get_schedule().get_current_game();
+               Game &current_game = season.get_schedule().get_current_game();
                season.play_game();
                played = true;
                if (season.get_schedule().get_games_left() <= 0)
